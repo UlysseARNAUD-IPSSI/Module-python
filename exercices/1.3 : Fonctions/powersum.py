@@ -3,16 +3,11 @@ from math import*
 """
 """
 
-def powersum(**parametres):
-
-    x = parametres.get('x', None)
-    y = parametres.get('y', None)
-    n = parametres.get('n', None)
-    to_float = parametres.get('to_float', None)
+def powersum(*,x,y,n,to_float=False):
 
     resultat = pow(int(x), int(n)) + pow(int(y), int(n))
 
-    if '0' == to_float:
+    if False == bool(to_float) or '0' == to_float:
         resultat = int(resultat)
 
     return resultat
