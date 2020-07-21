@@ -1,4 +1,3 @@
-from random import random, choice
 
 infoCity = {'Lyon': (513275, 47.87, 'Lyonnais'),
             'Paris': (2206488, 105.40, 'Parisiens'),
