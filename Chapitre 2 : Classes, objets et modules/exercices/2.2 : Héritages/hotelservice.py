@@ -175,18 +175,18 @@ customerServices = [Breakfast(301, 'tea', date(2018, 11, 7)),
                     Breakfast(301, 'coffee', date(2018, 11, 9))]
 
 print('\r\nTous les services de notre client (getInfo):')
-for s in customerServices:
-    print(s.getInfo())
+for customer in customerServices:
+    print(customer.getInfo())
 
 print('\r\nPrix total :', sum((s.cost for s in customerServices)))
 
 print('\r\nRéduction de 10% sur tout les menus premium')
-for s in customerServices:
-    if isinstance(s, Meal) and s.menu == 'premium':
-        s.discount(10)
+for customer in customerServices:
+    if isinstance(customer, Meal) and customer.menu == 'premium':
+        customer.discount(10)
 
 print('\r\nTous les services de notre client (après réduction) :')
-for s in customerServices:
-    print(s.getInfo())
+for customer in customerServices:
+    print(customer.getInfo())
 
 print('\r\nPrix total :', sum((s.cost for s in customerServices)))
