@@ -161,11 +161,10 @@ myDinner.discount(20)  # sera ignorée
 myDinner.showInfo()
 
 # doit échouer sur une exception
-try:
-    yourDinner = Meal(301, 'wine', menu='super luxury')
-except ValueError as e:
-    print(f'\r\nException raised: {e.__class__.__name__}', end='')
-    print(e.args)
+try: yourDinner = Meal(301, 'wine', menu='super luxury')
+except ValueError as exception:
+    print(f'\r\nException raised: {exception.__class__.__name__}', end='')
+    print(exception.args)
     print('Erreur si mauvais nom de menu: OK')
 
 customerServices = [Breakfast(301, 'tea', date(2018, 11, 7)),
@@ -178,7 +177,7 @@ print('\r\nTous les services de notre client (getInfo):')
 for customer in customerServices:
     print(customer.getInfo())
 
-print('\r\nPrix total :', sum((s.cost for s in customerServices)))
+print('\r\nPrix total :', sum((customer.cost for customer in customerServices)))
 
 print('\r\nRéduction de 10% sur tout les menus premium')
 for customer in customerServices:
@@ -189,4 +188,4 @@ print('\r\nTous les services de notre client (après réduction) :')
 for customer in customerServices:
     print(customer.getInfo())
 
-print('\r\nPrix total :', sum((s.cost for s in customerServices)))
+print('\r\nPrix total :', sum((customer.cost for customer in customerServices)))
