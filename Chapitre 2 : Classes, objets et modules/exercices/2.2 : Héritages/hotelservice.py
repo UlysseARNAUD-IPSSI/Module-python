@@ -5,12 +5,15 @@ from datetime import date
 from decimal import Decimal
 
 """
+    Service principal de l'hotel
 """
 
-class HotelService:
 
+class HotelService:
     """
+    Initialiseur
     """
+
     def __init__(self, number, when=None, cost=0, label=None):
         self.__dict__.update({
             'number': number,
@@ -20,17 +23,23 @@ class HotelService:
         })
 
     """
+    Recuperation des attributs
     """
+
     def __getattr__(self, name):
         return self.__dict__.get(name, None)
 
     """
+    Recuperation de l'ensemble des attributs
     """
+
     def getInfo(self):
         return dict(self.__dict__)
 
     """
+    Affichage des attributs
     """
+
     def showInfo(self):
         print(f'Numéro de chambre : {self.number}')
         print(f'Date : {self.date}')
@@ -38,7 +47,9 @@ class HotelService:
         print(f'label : {self.label}')
 
     """
+    Faire une promotion
     """
+
     def discount(self, rebate):
         if hasattr(self, 'rebate'):  # vérifie que self.rebate existe ou pas
             print('Warning: discount already applied (not applied)')
@@ -50,39 +61,61 @@ class HotelService:
             })
             return True
 
+
 """
+Petit déjeuner
 """
 
+
 class Breakfast(HotelService):
+    """
+    Attributs : la liste de forbidden correspond aux boissons interdites
+    et price au coût des boissons.
+    """
+
     forbidden = 'beer wine whisky'.split()
     price = 9
 
     """
+    Initialiseur
     """
+
     def __init__(self, number, beverage='coffee', when=None):
         self.beverage = beverage if beverage not in Breakfast.forbidden else 'coffee'
         super().__init__(number, when, Breakfast.price, 'Petit Déjeuner')
 
     """
+    Recuperation de l'ensemble des attributs
     """
+
     def getInfo(self):
         return dict(super().getInfo(), beverage=self.beverage)
 
     """
+    Affichage des attributs
     """
+
     def showInfo(self):
         super().showInfo()
         print(f'Boisson : {self.beverage}')
 
 
 """
+Repas
 """
 
+
 class Meal(HotelService):
+    """
+    Attributs : On établit les menus disponibles
+    """
+
     menu_price = {'basic': Decimal('15.00'), 'premium': 28, 'luxury': 98}
 
     """
+    Initialiseur
     """
+
     def __init__(self, num, beverage, when=None, menu='basic'):
         if menu not in Meal.menu_price:
             raise ValueError(f'Menu inconnu : {menu}')
@@ -92,18 +125,24 @@ class Meal(HotelService):
         super().__init__(num, when, Meal.menu_price[menu], f'Repas (formule {menu})')
 
     """
+    Récupération des attributs
     """
+
     def getInfo(self):
         return dict(super().getInfo(), beverage=self.beverage, menu=self.menu)
 
     """
+    Affichage des attributs
     """
+
     def showInfo(self):
         super().showInfo()
         print(f'Boisson : {self.beverage}')
         print(f'Menu : {self.menu}')
 
+
 """
+Tests
 """
 
 breakfast = Breakfast(301, 'tea', date(2020, 7, 20))
@@ -118,7 +157,7 @@ myDinner.showInfo()
 print(myDinner.getInfo())
 myDinner.discount(30)
 myDinner.showInfo()
-myDinner.discount(20) # sera ignorée
+myDinner.discount(20)  # sera ignorée
 myDinner.showInfo()
 
 # doit échouer sur une exception
