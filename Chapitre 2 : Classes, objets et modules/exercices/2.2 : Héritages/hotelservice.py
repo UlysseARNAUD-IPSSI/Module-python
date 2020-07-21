@@ -4,9 +4,13 @@
 from datetime import date
 from decimal import Decimal
 
-class HotelService:
-    """Service générique d'hôtel"""
+"""
+"""
 
+class HotelService:
+
+    """
+    """
     def __init__(self, number, when=None, cost=0, label=None):
         self.__dict__.update({
             'number': number,
@@ -15,21 +19,27 @@ class HotelService:
             'label': label
         })
 
+    """
+    """
     def __getattr__(self, name):
         return self.__dict__.get(name, None)
 
+    """
+    """
     def getInfo(self):
         return dict(self.__dict__)
 
+    """
+    """
     def showInfo(self):
-        """Affiche les informations sur un service d'hôtel"""
         print(f'Numéro de chambre : {self.number}')
         print(f'Date : {self.date}')
         print(f'Prix : {self.cost:.2f}')
         print(f'label : {self.label}')
 
+    """
+    """
     def discount(self, rebate):
-        """Applique une réduction sur le service"""
         if hasattr(self, 'rebate'):  # vérifie que self.rebate existe ou pas
             print('Warning: discount already applied (not applied)')
             return False
@@ -40,26 +50,39 @@ class HotelService:
             })
             return True
 
+"""
+"""
 
 class Breakfast(HotelService):
     forbidden = 'beer wine whisky'.split()
     price = 9
 
+    """
+    """
     def __init__(self, number, beverage='coffee', when=None):
         self.beverage = beverage if beverage not in Breakfast.forbidden else 'coffee'
         super().__init__(number, when, Breakfast.price, 'Petit Déjeuner')
 
+    """
+    """
     def getInfo(self):
         return dict(super().getInfo(), beverage=self.beverage)
 
+    """
+    """
     def showInfo(self):
         super().showInfo()
         print(f'Boisson : {self.beverage}')
 
+
+"""
+"""
+
 class Meal(HotelService):
-    """Repas"""
     menu_price = {'basic': Decimal('15.00'), 'premium': 28, 'luxury': 98}
 
+    """
+    """
     def __init__(self, num, beverage, when=None, menu='basic'):
         if menu not in Meal.menu_price:
             raise ValueError(f'Menu inconnu : {menu}')
@@ -68,14 +91,20 @@ class Meal(HotelService):
         self.beverage = beverage
         super().__init__(num, when, Meal.menu_price[menu], f'Repas (formule {menu})')
 
+    """
+    """
     def getInfo(self):
         return dict(super().getInfo(), beverage=self.beverage, menu=self.menu)
 
+    """
+    """
     def showInfo(self):
         super().showInfo()
         print(f'Boisson : {self.beverage}')
         print(f'Menu : {self.menu}')
 
+"""
+"""
 
 breakfast = Breakfast(301, 'tea', date(2020, 7, 20))
 breakfast.showInfo()
