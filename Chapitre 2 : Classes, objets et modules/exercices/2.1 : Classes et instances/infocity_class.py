@@ -3,7 +3,7 @@
 
 class City:
 
-    def __init__(self, name, *, population=None, surface=None, gentile=None):
+    def __init__(self, name, population=None, surface=None, gentile=None):
         self.__dict__.update({
             'name': name,
             'population': population,
