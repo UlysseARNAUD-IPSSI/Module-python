@@ -5,7 +5,7 @@ from datetime import date
 from decimal import Decimal
 
 """
-    Service principal de l'hotel
+Service principal de l'hotel
 """
 
 
@@ -167,8 +167,6 @@ except ValueError as e:
     print(f'\r\nException raised: {e.__class__.__name__}', end='')
     print(e.args)
     print('Erreur si mauvais nom de menu: OK')
-
-# un test un peu plus "métier", un client entier !
 
 customerServices = [Breakfast(301, 'tea', date(2018, 11, 7)),
                     Meal(301, 'wine', date(2018, 11, 7), menu='basic'),
