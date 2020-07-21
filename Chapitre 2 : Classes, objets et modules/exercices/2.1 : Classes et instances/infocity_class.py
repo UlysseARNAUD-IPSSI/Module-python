@@ -1,3 +1,6 @@
+"""
+"""
+
 class City:
 
     def __init__(self, name, *, population=None, surface=None, gentile=None):
@@ -19,6 +22,9 @@ class City:
         if self.population is not None: print(f' Habitants : {self.population}')
         if self.surface is not None: print(f' Surface : {self.surface} km2')
         if self.gentile is not None: print(f' Gentile : {self.gentile}')
+
+"""
+"""
 
 def main():
     lyon = City('Lyon', population=513275, surface=47.87, gentile="Lyonnais")
